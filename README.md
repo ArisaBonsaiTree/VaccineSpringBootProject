@@ -27,3 +27,26 @@ For IntelliJ, you don't need to configure your IDE for Lombok
 ======================
 Creating Entities and Generating a Database
 ======================
+
+@Entity --> Tells Spring this is an entity 
+@NoArgsCOnstructor/@Getter/@Setter - Lombok code to reduce boilerplace
+If we have a tablename that is a SQL reserve word --> In the database, different name
+@Table(name="order_table")
+
+Only if we have 1:M/N:M relationships
+
+Doing this creates joined columns instead of joined tables
+
+Lemonade.class
+@ManyToOne
+@JoinColumn
+private Order order; <-- order is the field
+
+Order.class
+@OneToMany(mappedBy = "order")
+mappedBy = "[NAME OF THE FIELD]"
+
+======================
+Setting Up Repositories and Populating the Database
+======================
+
