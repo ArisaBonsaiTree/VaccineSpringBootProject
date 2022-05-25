@@ -1,15 +1,14 @@
 package com.ArisaBonsaiTree.VaccineDatabase.entities;
 
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
-@Getter
-@Setter
+@Data
 public class Vaccine {
 
     @Id
@@ -19,7 +18,7 @@ public class Vaccine {
     @Column(nullable = false)
     private String name;
 
-    @OneToOne
-    Person person;
+    @OneToMany(mappedBy = "vaccine")
+    private List<Person> persons;
 
 }

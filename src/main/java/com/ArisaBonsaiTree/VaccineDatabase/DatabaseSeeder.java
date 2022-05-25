@@ -20,43 +20,26 @@ public class DatabaseSeeder implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        Vaccine vaccine1 = new Vaccine();
-        vaccine1.setName("Morderna");
-        vaccineRepository.saveAndFlush(vaccine1);
+        Vaccine morderna = new Vaccine();
+        morderna.setName("Morderna");
 
-        Person john = new Person();
-        john.setName("John");
-        john.setVaccine(vaccine1);
-        vaccine1.setPerson(john);
+        Vaccine pfizer = new Vaccine();
+        pfizer.setName("Pfizer");
 
-        personRepository.save(john);
-        vaccineRepository.saveAndFlush(vaccine1);
+        vaccineRepository.saveAll(Arrays.asList(new Vaccine[]{morderna, pfizer}));
 
+        Person person1 = new Person();
+        person1.setName("John");
+        //person1.setVaccine(morderna);
 
-        Vaccine vaccine2 = new Vaccine();
-        vaccine2.setName("Pfizer");
-        vaccineRepository.saveAndFlush(vaccine2);
+        Person person2 = new Person();
+        person2.setName("Luke");
+        // person2.setVaccine(pfizer);
 
-        Person luke = new Person();
-        luke.setName("Luke");
-        luke.setVaccine(vaccine2);
-        vaccine2.setPerson(luke);
+        Person person3 = new Person();
+        person3.setName("Smith");
+        // person3.setVaccine(pfizer);
 
-        personRepository.save(luke);
-        vaccineRepository.saveAndFlush(vaccine2);
-
-
-        Vaccine vaccine3 = new Vaccine();
-        vaccine3.setName("Morderna");
-        vaccineRepository.saveAndFlush(vaccine3);
-
-        Person steve = new Person();
-        steve.setName("Steve");
-        steve.setVaccine(vaccine3);
-        vaccine3.setPerson(steve);
-
-        personRepository.saveAndFlush(steve);
-        vaccineRepository.saveAndFlush(vaccine3);
-
+        personRepository.saveAll(Arrays.asList(new Person[]{person1, person2, person3}));
     }
 }

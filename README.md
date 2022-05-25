@@ -74,7 +74,44 @@ save() vs saveAndFlush()
 
 
 ======================
-HTTP & REST
+Setting up the Person Controller and Service
 ======================
 
+@RestController --> Tell spring this will be recieiving HTTP request
+@RequestMapping("[endpoints]") --> handle endpoints that start with [endpoints]
 
+CONTROLLER SHOULD NOT DIRECTLY INTERACT WITH THE REPOSITORY
+Controller will ask the service that will ask the repository which [Control pipeline]
+
+Forward engineering --> Create a method in the controller and make our IDE create the method in the service interface
+In our ServiceImpl, we need to add @Service
+
+Person >---|- Vaccine:  
+A person has one vaccine  
+A vaccine can go to many people[person]
+
+Person.class  
+@ManyToOne  
+@JoinColumn  
+private Vaccine vaccine;  
+
+Vaccine.class  
+@OneToMany(mappedBy = "vaccine")  
+private List<Person> person;  
+
+VaccineTable:  
+id | name  
+1  | Morderna  
+2  | Pfizer  
+
+PersonTable:  
+id | Name | vaccine_id  
+1  | John | 1  
+2  | Luke | 2  
+3  | Smith| 2  
+
+At the moment, we shouldn't link Vaccine -- Person at the moment.
+
+======================
+Adding DTOs and Mappers
+======================
