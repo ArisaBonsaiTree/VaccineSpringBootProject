@@ -49,4 +49,32 @@ mappedBy = "[NAME OF THE FIELD]"
 ======================
 Setting Up Repositories and Populating the Database
 ======================
+Spring will generate a repository that is located at JpaRepository.class
+    saveAll(), getOne(), and ...
+    CTRL + Click on JpaRepository to view the methods JpaRepository will generate for us
+    
+A benefit of using JpaRepository is that we decouple from PostgreSQL, meaning we can use MySQL/Oracle
+Since this is an interface that Spring will generate based off the Drivers
+
+CommandLineRunner: Take care of anything we want before our application starts
+CommandLineRunner will run after Spring starts up
+
+@Component tells Spring they will manage it
+@Repository is a child of Componenet that helps us convert an entity to database table
+
+@DatabaseSeeder
+private PersonRepository personRepository;
+@AllArgsConstructor will make Spring create this object first --> Spring has to pass a PersonRepository object
+
+Ctrl + Alt + L --> Format the code properly
+
+save() vs saveAndFlush()
+    save(): May or may not write your changes to the DB straight away
+    saveAndFlush() ENFORCING THE SYNCHRONIZATION
+
+
+======================
+HTTP & REST
+======================
+
 
