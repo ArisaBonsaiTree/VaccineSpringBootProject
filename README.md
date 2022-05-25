@@ -2,8 +2,9 @@
 Decided to give myself more practice with Spring Boot by making a simple backend
 
 ======================
-Creating our First Spring Project
+__Creating our First Spring Project__
 ======================
+
 https://start.spring.io
 Mavern Project/Java/2.7.0/Jar/11
 Dependencies: Spring Web, Spring Boot DevTools, Lombok, Spring Data JPA, PostgreSQL Driver
@@ -25,7 +26,7 @@ For IntelliJ, you don't need to configure your IDE for Lombok
 
 
 ======================
-Creating Entities and Generating a Database
+__Creating Entities and Generating a Database__
 ======================
 
 @Entity --> Tells Spring this is an entity 
@@ -46,9 +47,11 @@ Order.class
 @OneToMany(mappedBy = "order")
 mappedBy = "[NAME OF THE FIELD]"
 
-======================
-Setting Up Repositories and Populating the Database
-======================
+
+=============
+__Setting Up Repositories and Populating the Database__
+=============  
+
 Spring will generate a repository that is located at JpaRepository.class
     saveAll(), getOne(), and ...
     CTRL + Click on JpaRepository to view the methods JpaRepository will generate for us
@@ -74,7 +77,7 @@ save() vs saveAndFlush()
 
 
 ======================
-Setting up the Person Controller and Service
+__Setting up the Person Controller and Service__
 ======================
 
 @RestController --> Tell spring this will be recieiving HTTP request
@@ -112,6 +115,86 @@ id | Name | vaccine_id
 
 At the moment, we shouldn't link Vaccine -- Person at the moment.
 
+
 ======================
-Adding DTOs and Mappers
+__Adding DTOs and Mappers__
 ======================
+
+__Apostille:__ To have the project auto reload with Spring-boot on ODEA IntelliJ,
+Make sure you have spring-boot-devtools in your pom.xml file
+File > Setting > Build, Execution, Deployment > Compiler > [] Build project automatically
+
+Linking Vaccine and Person just required me removing:
+Vaccine.java:   
+@OneToMany(mappedBy = "vaccine")  
+private List<Person> persons;
+
+Person.java:  
+@ManyToOne   
+@JoinColumn(name = "vaccine_id")   
+private Vaccine vaccine;   
+
+{
+"id": 3,
+"name": "John",
+"vaccine": {
+"id": 1,
+"name": "Morderna"
+}
+},
+
+DTO: Serves as objects that the client knows. Abstracts them in a way. 
+
+We can create as much DTO as we want. We can have six DTO's go to one entity!
+
+models is the presentation layer, what the client should know
+
+Request is what we are inputting
+@NoArgsConstructor
+@Data
+
+Response contains the id
+We want to let our client know where the object was stored
+
+SAME NAME AS OUR ENTITIES!!!
+
+In our controller, instead of returning a Person object, WE WANT TO RETURN A RESPONSE DTO
+In our argumenets, we send REQUEST DTO
+
+REQUEST: Input
+RESPONSE: Output
+
+PersonRepository DOES NOT return DTO's. It returns a list of people
+We need to map it to convert it to DTO
+We will manually map it, then we will automate it
+
+int[] y = {1,2,3,4,5}
+for(int x: y)
+print(x) --> 1, 2, 3, 4, 5
+
+
+for(Person person:personRepository.findAll())
+For each person entity in personRepository.findAll(),
+result.add(new PersonResponseDto())
+
+In our PersonResponseDto --> Add @AllArgsConstructor [Overloaded constructor]
+
+First:   
+Create a Person entity object. Which we will map our RequestDto objects to the Person entity.
+
+Save that entity to our repository using saveAndFlush
+
+Now we have a generated ID, then we create a ResponseDto and map it from the Person entity/what was stored in our databased using Repository
+
+Map the ID that our DB generated and other attributes and return it as a ResponseDTO
+
+Give the method PersonRequestDTO -> Map it into a Person object -> saveAndFlush() that
+person object which returns an entity with an id -> Map that Person Object into a PersonResponseDTO->
+return PersonResponseDto
+
+Request -> What we expect to be given
+
+Response -> What we expect to give to the client
+
+
+

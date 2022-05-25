@@ -2,6 +2,8 @@ package com.ArisaBonsaiTree.VaccineDatabase.controllers;
 
 
 import com.ArisaBonsaiTree.VaccineDatabase.entities.Person;
+import com.ArisaBonsaiTree.VaccineDatabase.model.PersonRequestDto;
+import com.ArisaBonsaiTree.VaccineDatabase.model.PersonResponseDto;
 import com.ArisaBonsaiTree.VaccineDatabase.services.PersonService;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -18,12 +20,12 @@ public class PersonController {
     private PersonService personService;
 
     @GetMapping
-    public List<Person> getAllPeople(){
+    public List<PersonResponseDto> getAllPeople(){
         return personService.getAllPeople();
     }
 
     @PostMapping
-    public Person createPerson(@RequestBody Person person){
-        return personService.createPerson(person);
+    public PersonResponseDto createPerson(@RequestBody PersonRequestDto personRequestDto){
+        return personService.createPerson(personRequestDto);
     }
 }

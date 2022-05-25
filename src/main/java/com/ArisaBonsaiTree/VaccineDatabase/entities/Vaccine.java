@@ -18,7 +18,7 @@ public class Vaccine {
     @Column(nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "vaccine")
-    private List<Person> persons;
+//    @OneToMany(mappedBy = "vaccine")
+//    private List<Person> persons;
 
 }
