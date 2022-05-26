@@ -257,6 +257,39 @@ We are changing our Dto from primitive to wrapper types:
 double --> Double :: Now we can check if something is null [A person didn't post this info]
 
 
+======================
+__Creating & Handling our own Custom Exceptions__
+======================
+
+Create two new packages: exceptions and advice under the controller package
+
+Create our custom exceptions in our exceptions package
+
+In each of the exception files we created --> extends RuntimeException
+
+InteliJ won't generate one without some help
+
+private static final long serialVersionUID = [PLACE CURSOR HERE]; <-- Red error line, place cursor on it and hit ALT + Enter
+
+Now add private String message and include @AllArgsConstructor & @Getter / @Setter
+
+Now we need to create an error DTO
 
 
+Now we go back to our PersonControllerAdvice and create ExceptionsHandler: It will look for a certain Exception
 
+Add @ResponseBody --> Convert Error DTO to json
+@RestController --> Controller & ResponseController
+
+
+Now we do not need to wrap our controllers with "ResponseEntity"
+
+Now we can just throw our own custom exceptions when we want
+
+If we want to throw a successful response code --> In PersonController.java --> Under @PostMapping    
+@ResponseStatus(HttpStatus.CREATED)
+
+Format our code -->  CTRL + ALT + L   
+Remove unused imports --> CTRL + ALT + O   
+Switch to a different window file --> ALT + [LEFT ARROW] || [RIGHT ARROW]
+Close a file --> CTRL + F4

@@ -1,19 +1,16 @@
 package com.ArisaBonsaiTree.VaccineDatabase.services.impl;
 
 import com.ArisaBonsaiTree.VaccineDatabase.entities.Person;
+import com.ArisaBonsaiTree.VaccineDatabase.exceptions.BadRequestException;
+import com.ArisaBonsaiTree.VaccineDatabase.exceptions.NotFoundException;
 import com.ArisaBonsaiTree.VaccineDatabase.mappers.PersonMapper;
 import com.ArisaBonsaiTree.VaccineDatabase.model.PersonRequestDto;
 import com.ArisaBonsaiTree.VaccineDatabase.model.PersonResponseDto;
 import com.ArisaBonsaiTree.VaccineDatabase.repositories.PersonRepository;
-import com.ArisaBonsaiTree.VaccineDatabase.repositories.VaccineRepository;
 import com.ArisaBonsaiTree.VaccineDatabase.services.PersonService;
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,24 +29,27 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public ResponseEntity<PersonResponseDto> getPersonById(Long id) {
-        Optional<Person> optionalPerson = personRepository.findById(id);
-
-        if(!optionalPerson.isPresent()){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-
-        return new ResponseEntity<>(personMapper.entityToResponseDto(optionalPerson.get()), HttpStatus.OK);
-    }
-
-    @Override
-    public ResponseEntity<PersonResponseDto> createPerson(PersonRequestDto personRequestDto) {
-        if(personRequestDto.getName() == null){
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    public PersonResponseDto createPerson(PersonRequestDto personRequestDto) {
+        if (personRequestDto.getName() == null) {
+            throw new BadRequestException("All fields are required for creating a lemonade");
         }
 
         Person personToSave = personMapper.requestDtoToEntity(personRequestDto);
 
-        return new ResponseEntity<>(personMapper.entityToResponseDto(personRepository.saveAndFlush(personToSave)), HttpStatus.OK);
+        return personMapper.entityToResponseDto(personRepository.saveAndFlush(personToSave));
     }
+
+
+    @Override
+    public PersonResponseDto getPersonById(Long id) {
+        Optional<Person> optionalPerson = personRepository.findById(id);
+
+        if (!optionalPerson.isPresent()) {
+            throw new NotFoundException("No user found with id: " + id);
+        }
+
+        return personMapper.entityToResponseDto(optionalPerson.get());
+    }
+
+
 }

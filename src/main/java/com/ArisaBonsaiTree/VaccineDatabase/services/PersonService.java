@@ -10,8 +10,8 @@ import java.util.List;
 public interface PersonService {
     List<PersonResponseDto> getAllPeople();
 
-    ResponseEntity<PersonResponseDto> getPersonById(Long id);
-    ResponseEntity<PersonResponseDto> createPerson(PersonRequestDto personRequestDto);
+    PersonResponseDto getPersonById(Long id);
+    PersonResponseDto createPerson(PersonRequestDto personRequestDto);
 
 
 }

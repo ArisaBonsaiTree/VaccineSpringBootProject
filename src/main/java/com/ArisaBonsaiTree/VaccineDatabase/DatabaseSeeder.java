@@ -34,11 +34,11 @@ public class DatabaseSeeder implements CommandLineRunner {
 
         Person person2 = new Person();
         person2.setName("Luke");
-         person2.setVaccine(pfizer);
+        person2.setVaccine(pfizer);
 
         Person person3 = new Person();
         person3.setName("Smith");
-         person3.setVaccine(pfizer);
+        person3.setVaccine(pfizer);
 
         personRepository.saveAll(Arrays.asList(new Person[]{person1, person2, person3}));
     }
