@@ -197,4 +197,46 @@ Request -> What we expect to be given
 Response -> What we expect to give to the client
 
 
+Adding MapStruct/Lombok Spring Boot [In out pom.xml]:   
+https://springframework.guru/using-mapstruct-with-project-lombok/
+
+
+How to clean install Mavern?  
+On the top right, where we run our project, click on the dropdown menu and click edit configuration.  
+Now add mavern and add "clean install" and we can easily run our project
+
+Now create a mappers package and make an interface "PersonMapper"  
+@Mapper(componentModel = "spring")
+
+
+Person requestDtoToEntity(PersonRequestDto personRequestDto);   
+Person requestDtoToEntity(PersonRequestDto personRequestDto);   <- Replaces the following:  
+    Person personToSave = new Person();   
+    personToSave.setName(personRequestDto.getName());   
+    personToSave.setVaccine(personRequestDto.getVaccine());  
+
+PersonResponseDto entityToResponseDto(Person person);   
+PersonResponseDto personToPersonResponseDto(Person person);   
+    return new PersonResponseDto(savedPerson.getId(), savedPerson.getName(), savedPerson.getVaccine());
+
+List<PersonResponseDto> entitiesToResponseDtos(List<Person> persons);   
+List<PersonResponseDto> entitiesToResponseDtos(List<Person> persons);   
+    for(Person person:personRepository.findAll()){
+        result.add(new PersonResponseDto(
+                person.getId(),
+                person.getName(),
+                person.getVaccine()
+        ));
+    }
+
+IntelliJ Idea mapstruct java: Internal error in the mapping processor: java.lang.NullPointerException?   
+    You can also add -Djps.track.ap.dependencies=false at File | Settings (Preferences on macOS) | Build, Execution, Deployment | Compiler | Build process VM options as a workaround.  
+    -Djps.track.ap.dependencies=false
+
+If you change your DTO/Entity you need to rebuild your project! [STOP THE PROJECT AND RUN THE MAVEN BUILD]
+
+
+
+
+
 
