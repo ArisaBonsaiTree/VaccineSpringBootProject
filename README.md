@@ -235,6 +235,26 @@ IntelliJ Idea mapstruct java: Internal error in the mapping processor: java.lang
 
 If you change your DTO/Entity you need to rebuild your project! [STOP THE PROJECT AND RUN THE MAVEN BUILD]
 
+======================
+__Basic Exception Handling with HTTP Status Codes__
+======================
+
+In our Controllers, we wrap our return type with ResponseEntity<RETURN_TYPE>
+
+
+getPersonById --> throws an exception --> Which is why we implement a derived query in our Person repository   
+Derived query will make JpaRepository generate SQL methods based off the name
+
+JpaRepository wants to use Optional<>. Prevents null and   
+Optional<Person> findById(Long id);
+
+Now we can use isEmpty() instead of null when working with optional --> isPresent() NOT isEmpty()
+
+
+If the optional object is not null, we can call .get()
+
+We are changing our Dto from primitive to wrapper types:   
+double --> Double :: Now we can check if something is null [A person didn't post this info]
 
 
 

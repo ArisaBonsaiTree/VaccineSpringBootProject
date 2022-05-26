@@ -9,6 +9,8 @@ import com.ArisaBonsaiTree.VaccineDatabase.repositories.VaccineRepository;
 import com.ArisaBonsaiTree.VaccineDatabase.services.PersonService;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -30,10 +32,24 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public PersonResponseDto createPerson(PersonRequestDto personRequestDto) {
+    public ResponseEntity<PersonResponseDto> getPersonById(Long id) {
+        Optional<Person> optionalPerson = personRepository.findById(id);
+
+        if(!optionalPerson.isPresent()){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(personMapper.entityToResponseDto(optionalPerson.get()), HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<PersonResponseDto> createPerson(PersonRequestDto personRequestDto) {
+        if(personRequestDto.getName() == null){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
 
         Person personToSave = personMapper.requestDtoToEntity(personRequestDto);
 
-        return personMapper.entityToResponseDto(personRepository.saveAndFlush(personToSave));
+        return new ResponseEntity<>(personMapper.entityToResponseDto(personRepository.saveAndFlush(personToSave)), HttpStatus.OK);
     }
 }
