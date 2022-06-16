@@ -293,3 +293,33 @@ Format our code -->  CTRL + ALT + L
 Remove unused imports --> CTRL + ALT + O   
 Switch to a different window file --> ALT + [LEFT ARROW] || [RIGHT ARROW]
 Close a file --> CTRL + F4
+
+Git FAQ:   
+If we are working on a side branch, how do we merge to main?
+
+git branch [name] --> Create a new branch   
+git checkout [name] --> git add * --> git commit -m "sads"   
+git checkout main --> git merge [name]   
+git push   
+
+Merge Conflict???    
+Go to the file that has the conflict
+
+
+git status --> See a file you want to go back?
+
+git restore *
+
+
+Delete a local branch  
+git branch -d <local-branch>
+
+
+Create a branch from master    
+git checkout -b [NAME_OF_BRANCH] master
+
+
+CTRL + SHIFT + UP_ARROW TO EASILY MOVE METHODS AROUND!
+
+
+
