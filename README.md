@@ -51,6 +51,7 @@ mappedBy = "[NAME OF THE FIELD]"
 =============
 __Setting Up Repositories and Populating the Database__
 =============  
+https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods
 
 Spring will generate a repository that is located at JpaRepository.class
     saveAll(), getOne(), and ...
