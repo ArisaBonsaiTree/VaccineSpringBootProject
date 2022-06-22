@@ -19,7 +19,7 @@ public class Person {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "vaccine_id")
+//    @JoinColumn(name = "vaccine_id")
     private Vaccine vaccine;
 
 }

@@ -30,7 +30,7 @@ public class DatabaseSeeder implements CommandLineRunner {
 
         Person person1 = new Person();
         person1.setName("John");
-        person1.setVaccine(morderna);
+//        person1.setVaccine(morderna);
 
         Person person2 = new Person();
         person2.setName("Luke");

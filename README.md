@@ -321,5 +321,33 @@ git checkout -b [NAME_OF_BRANCH] master
 
 CTRL + SHIFT + UP_ARROW TO EASILY MOVE METHODS AROUND!
 
+Want to copy what the main branch has to your side branch?
+
+Switch to your local branch
+> git checkout configUpdate
+ 
+Merge remote master to your branch
+> git rebase master configUpdate
+
+Any conflicts?
+> git add [~~file name]
+
+Continue rebase
+> git rebase --continue
+
+When trying to run on port 8080 -> I usually get a port is in use error
+On Windows [Open Terminal with Admin priv]
+netstat -ona | findstr :8080 | findstr LISTENING
+TCP    0.0.0.0:8080           0.0.0.0:0              LISTENING       THIS_NUMBER
+taskkill /PID THIS_NUMBER /F 
 
 
+On Cmder, git clone [Link_To_Repo] ProjectThree
+
+Trouble shooting
+1. Is the folder named Java marked "Generated Source Root"
+2. Did we build the project using MAVERN and run the commands "clean install"
+3. Is the configuration set to Spring?
+   1. JDK set to java 17 or to its respective version
+   2. Is the module set to the src folder parent folder name?
+   3. Is the Spring Boot class correct?
