@@ -354,6 +354,8 @@ Trouble shooting
    3. Is the Spring Boot class correct?
 
 
+# Want to link your file to a GitHub repo?
+
 Quick setup — if you’ve done this kind of thing before
 or
 
@@ -373,3 +375,9 @@ git push -u origin main
 git remote add origin https://github.com/ArisaBonsaiTree/JulyProjectYouTubeChatScannerr.git
 git branch -M main
 git push -u origin main
+
+# Want to rename a repo and not break your code?
+Rename the repo then --> 
+
+
+$ git remote set-url origin new_url
