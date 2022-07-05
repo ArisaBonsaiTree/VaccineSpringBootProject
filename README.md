@@ -381,3 +381,13 @@ Rename the repo then -->
 
 
 $ git remote set-url origin new_url
+
+# Add Maven Config to a Project?
+[] Store as Project File --> Add the Maven Config to the project
+
+# Want to Build and Run?
+Method 1 --> Read the following https://www.jetbrains.com/help/idea/run-debug-configuration.html
+
+Method 2 --> Spring Boot Config --> Edit Config --> Modify Options --> Check "Add Before Launch Task"
+
+Then click "Maven Goals" and type "clean install" in the goals
